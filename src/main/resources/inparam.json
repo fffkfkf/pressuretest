@@ -1,0 +1,228 @@
+{
+  "ROOT": {
+    "HEADER": {
+      "ROUTING": {
+        "ROUTE_KEY": "11",
+        "ROUTE_VALUE": "12"
+      }
+    },
+    "BODY": {
+      "BUSI_INFO": {
+        "CURR_INFO": {
+          "BUSI_ID": "9999",
+          "CUST_ID_TYPE": "0",
+          "CUST_ID_VALUE": "7878788",
+          "CREATE_ACCEPT": "333333333"
+        },
+        "CHILDREN_INFO": {
+          "RADN_FSM_INFO": {
+            "GEN_FILED_LIST": [
+              {
+                "CURR_INFO": {
+                  "EXECACT_PERIOD": "CRT",
+                  "BUSI_ID": "9999",
+                  "CUST_ID_TYPE": "0",
+                  "SEQ_NO": "0",
+                  "CUST_ID_VALUE": "7878788",
+                  "CREATE_ACCEPT": "0crt"
+                },
+                "CHILDREN_INFO": {
+                  "CONF_FSM_INFO": {
+                    "FSM_ID": "fsm1"
+                  }
+                }
+              },
+              {
+                "CURR_INFO": {
+                  "EXECACT_PERIOD": "CRT",
+                  "BUSI_ID": "9999",
+                  "CUST_ID_TYPE": "0",
+                  "SEQ_NO": "1",
+                  "CUST_ID_VALUE": "7878788",
+                  "CREATE_ACCEPT": "1crt"
+                },
+                "CHILDREN_INFO": {
+                  "CONF_FSM_INFO": {
+                    "FSM_ID": "fsm2"
+                  }
+                }
+              },
+              {
+                "CURR_INFO": {
+                  "EXECACT_PERIOD": "CRT",
+                  "BUSI_ID": "16400",
+                  "CUST_ID_TYPE": "0",
+                  "SEQ_NO": "2",
+                  "CUST_ID_VALUE": "7878788",
+                  "CREATE_ACCEPT": "2crt"
+                },
+                "CHILDREN_INFO": {
+                  "RADN_FSM_INFO": {
+                    "GEN_FILED_LIST": [
+                      {
+                        "CURR_INFO": {
+                          "EXECACT_PERIOD": "PROC",
+                          "BUSI_ID": "9999",
+                          "CUST_ID_TYPE": "0",
+                          "SEQ_NO": "0",
+                          "CUST_ID_VALUE": "7878788",
+                          "CREATE_ACCEPT": "1prc"
+                        },
+                        "CHILDREN_INFO": {
+                          "CONF_FSM_INFO": {
+                            "FSM_ID": "fsm2"
+                          }
+                        }
+                      },
+                      {
+                        "CURR_INFO": {
+                          "EXECACT_PERIOD": "EXEC",
+                          "BUSI_ID": "9999",
+                          "CUST_ID_TYPE": "0",
+                          "SEQ_NO": "1",
+                          "CUST_ID_VALUE": "7878788",
+                          "CREATE_ACCEPT": "1exec"
+                        },
+                        "CHILDREN_INFO": {
+                          "CONF_FSM_INFO": {
+                            "FSM_ID": "fsm2"
+                          }
+                        }
+                      }
+                    ],
+                    "CONS_INFO_LIST": [
+                      {
+                        "PRE_SEQ": "0",
+                        "NEXT_SEQ": "1",
+                        "REL_ID": "relid1"
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "CONS_INFO_LIST": [
+              {
+                "PRE_SEQ": "0",
+                "NEXT_SEQ": "1",
+                "REL_ID": "relid1"
+              },
+              {
+                "PRE_SEQ": "1",
+                "NEXT_SEQ": "2",
+                "REL_ID": "relid1"
+              }
+            ]
+          }
+        },
+        "CUSTOM_INFO": {
+          "BUSI_MODEL": {
+            "USER_INFO": {
+              "ID_NO": "7878788",
+              "PHONE_NO": "13988886666",
+              "CONTRACT_NO": "2001",
+              "CUST_ID": "11340",
+              "EMP_ID": "001",
+              "EMP_GROUP": "01",
+              "USER_GROUP_INFO": {
+                "GROUP_ID": "121154545441",
+                "USE_ADDRESS": "上海",
+                "GROUP_CODE": "a",
+                "GROUP_TYPE": "first",
+                "GROUP_NAME": "shirley",
+                "GROUP_DESC": "nice"
+              },
+              "USER_GOODS_INFO_LIST": [
+                {
+                  "MAIN_FLAG": "a",
+                  "SVC_ID": "s00222",
+                  "PROD_ID": "p9999",
+                  "GOODS_ID": "g00111",
+                  "PRC_ID": "21199",
+                  "EFF_DATE": "20230410152122",
+                  "EXP_DATE": "20231231131200",
+                  "USER_GOODS_ATTR_INFO_LIST": [
+                    {
+                      "ATTR_ID": "attr01",
+                      "ATTR_NO": "attr01",
+                      "ATTR_VALUE": "val01",
+                      "GRP_NO": "grp01"
+                    },
+                    {
+                      "ATTR_ID": "attr02",
+                      "ATTR_NO": "attr02",
+                      "ATTR_VALUE": "val02",
+                      "GRP_NO": "grp02"
+                    }
+                  ],
+                  "USER_SVC_ATTR_INFO_LIST": [
+                    {
+                      "ATTR_ID": "attr03",
+                      "ATTR_NO": "attr03",
+                      "ATTR_VALUE": "val03",
+                      "GRP_NO": "grp03"
+                    },
+                    {
+                      "ATTR_ID": "attr04",
+                      "ATTR_NO": "attr04",
+                      "ATTR_VALUE": "val04",
+                      "GRP_NO": "grp04"
+                    }
+                  ]
+                },
+                {
+                  "MAIN_FLAG": "b",
+                  "SVC_ID": "s002222",
+                  "PROD_ID": "p666666",
+                  "GOODS_ID": "g00223",
+                  "PRC_ID": "002323",
+                  "EFF_DATE": "20230410152322",
+                  "EXP_DATE": "20241231123322",
+                  "USER_GOODS_ATTR_INFO_LIST": [
+                    {
+                      "ATTR_ID": "attr05",
+                      "ATTR_NO": "attr05",
+                      "ATTR_VALUE": "val05",
+                      "GRP_NO": "grp05"
+                    },
+                    {
+                      "ATTR_ID": "attr06",
+                      "ATTR_NO": "attr06",
+                      "ATTR_VALUE": "val06",
+                      "GRP_NO": "grp06"
+                    }
+                  ],
+                  "USER_SVC_ATTR_INFO_LIST": [
+                    {
+                      "ATTR_ID": "attr07",
+                      "ATTR_NO": "attr07",
+                      "ATTR_VALUE": "val07",
+                      "GRP_NO": "grp07"
+                    },
+                    {
+                      "ATTR_ID": "attr08",
+                      "ATTR_NO": "attr08",
+                      "ATTR_VALUE": "val08",
+                      "GRP_NO": "grp08"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "OPR_INFO": {
+        "TENANT_ID": "dev",
+        "APPLY_ID": "22012312",
+        "CHANNEL_TYPE": "11",
+        "CONTACT_ID": "900012123",
+        "GROUP_ID": "0451",
+        "LOGIN_NO": "bb0982",
+        "OP_CODE": "1000",
+        "OP_NOTE": "测试1000开户",
+        "REGION_ID": "21"
+      }
+    }
+  }
+}

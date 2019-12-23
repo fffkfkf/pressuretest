@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.order.sitech</groupId>
+    <artifactId>pressuretest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>com.sitech.ijcf</groupId>
+        <artifactId>ijcf-boot-dependencies</artifactId>
+        <!--<version>3.1.5.SNAPSHOT</version>     -->
+        <version>3.1.5.RELEASE</version>
+        <!-- <version>3.1.6.RELEASE</version>-->
+
+    </parent>
+
+    <!-- 统一管理项目的版本信息 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <springcloud.version>Dalston.SR3</springcloud.version>
+        <!--	<jcfboot.version>3.1.5.SNAPSHOT</jcfboot.version>-->
+
+        <jcfboot.version>3.1.5.RELEASE</jcfboot.version>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sitech.ijcf</groupId>
+            <artifactId>ijcf-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sitech.ijcf</groupId>
+            <artifactId>ijcf-boot-starter-rest</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sitech.ijcf</groupId>
+            <artifactId>ijcf-boot-starter-message6</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sitech.ijcf</groupId>
+            <artifactId>ijcf-boot-starter-springcloud</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.sitech.ijcf</groupId>
+                <artifactId>ijcf-boot-dependencies</artifactId>
+                <version>${jcfboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${springcloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
