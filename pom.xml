@@ -7,8 +7,9 @@
     <groupId>com.order.sitech</groupId>
     <artifactId>pressuretest</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+<!--  用来打包的。 -->
     <packaging>jar</packaging>
+
     <parent>
         <groupId>com.sitech.ijcf</groupId>
         <artifactId>ijcf-boot-dependencies</artifactId>

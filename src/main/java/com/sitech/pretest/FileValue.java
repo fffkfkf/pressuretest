@@ -18,6 +18,9 @@ public class FileValue {
     @Value("${serviceName.addr}")
     private String addr;
 
+    @Value("${request.total}")
+    private int total;
+
     public int getCount() {
         return count;
     }
@@ -32,6 +35,14 @@ public class FileValue {
 
     public void setAddr(String addr) {
         this.addr = addr;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
 

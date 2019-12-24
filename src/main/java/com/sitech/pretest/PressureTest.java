@@ -15,6 +15,10 @@ import javax.annotation.Resource;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 /**
  * @author gmq
@@ -28,55 +32,75 @@ public class PressureTest {
     private FileValue fileValue;
     @Resource
     private IServiceClient serviceClient;
+    public static int counti = 0;
 
     @PostConstruct
     public void testOrderCreate() {
+
         int count = fileValue.getCount();
+        int total = fileValue.getTotal();
         try {
-
-
             //BUSI_MODEL   USER_INFO  PHONE_NO
-            JSONObject param = readJsonFromClassPath("inparam.json", JSONObject.class);
-            Object root = param.get("ROOT");
-            JSONObject jsonObject = JSONObject.parseObject(root.toString());
-            Object body = jsonObject.get("BODY");
-            JSONObject jsonObject1 = JSONObject.parseObject(body.toString());
-            Object busi_info = jsonObject1.get("BUSI_INFO");
-            JSONObject jsonObject2 = JSONObject.parseObject(busi_info.toString());
-            Object custom_info = jsonObject2.get("CUSTOM_INFO");
-            JSONObject jsonObject3 = JSONObject.parseObject(custom_info.toString());
-            Object busi_model = jsonObject3.get("BUSI_MODEL");
-            JSONObject jsonObject4 = JSONObject.parseObject(busi_model.toString());
-            Object user_info = jsonObject4.get("USER_INFO");
-            JSONObject jsonObject5 = JSONObject.parseObject(user_info.toString());
-            Object phone_no = jsonObject5.get("PHONE_NO");
-            jsonObject5.remove("PHONE_NO");
-            //---------
-            jsonObject5.put("PHONE_NO","13132");
-            //-----
-            jsonObject4.remove("USER_INFO");
-            jsonObject4.put("USER_INFO",jsonObject5);
-            jsonObject3.remove("BUSI_MODEL");
-            jsonObject3.put("BUSI_MODEL",jsonObject4);
-            jsonObject2.remove("CUSTOM_INFO");
-            jsonObject2.put("CUSTOM_INFO",jsonObject3);
-            jsonObject1.remove("BUSI_INFO");
-            jsonObject1.put("BUSI_INFO",jsonObject2);
-            jsonObject.remove("BODY");
-            jsonObject.put("BODY",jsonObject1);
-            param.remove("ROOT");
-            param.put("ROOT",jsonObject);
-            System.out.println("param："+param);
+
             String serviceName = fileValue.getAddr();
-          /* for(int i=0 ;i<count;i++){
-                long begin = System.currentTimeMillis();
-                String rtnStr = serviceClient.callService(serviceName,param.toString() , String.class, ArchitectureType.SPRINGCLOUD);
-                long end = System.currentTimeMillis();
-                long time=end-begin;
-                log.info("time"+i+"---------------"+time+"毫秒---rtnStr---------------"+rtnStr);
-            }*/
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            final Semaphore semaphore = new Semaphore(total);
+            final CountDownLatch countDownLatch = new CountDownLatch(count);
+            for (int i = 0; i < count ; i++) {
+                executorService.execute(() -> {
+                    try {
+
+                        JSONObject param = readJsonFromClassPath("inparam.json", JSONObject.class);
+                        Object root = param.get("ROOT");
+                        JSONObject jsonObject = JSONObject.parseObject(root.toString());
+                        Object body = jsonObject.get("BODY");
+                        JSONObject jsonObject1 = JSONObject.parseObject(body.toString());
+                        Object busi_info = jsonObject1.get("BUSI_INFO");
+                        JSONObject jsonObject2 = JSONObject.parseObject(busi_info.toString());
+                        Object custom_info = jsonObject2.get("CUSTOM_INFO");
+                        JSONObject jsonObject3 = JSONObject.parseObject(custom_info.toString());
+                        Object busi_model = jsonObject3.get("BUSI_MODEL");
+                        JSONObject jsonObject4 = JSONObject.parseObject(busi_model.toString());
+                        Object user_info = jsonObject4.get("USER_INFO");
+                        JSONObject jsonObject5 = JSONObject.parseObject(user_info.toString());
+                        Object phone_no = jsonObject5.get("PHONE_NO");
+                        jsonObject5.remove("PHONE_NO");
+                        //----
+                        jsonObject5.put("PHONE_NO",counti);
+                        //-----
+                        jsonObject4.remove("USER_INFO");
+                        jsonObject4.put("USER_INFO",jsonObject5);
+                        jsonObject3.remove("BUSI_MODEL");
+                        jsonObject3.put("BUSI_MODEL",jsonObject4);
+                        jsonObject2.remove("CUSTOM_INFO");
+                        jsonObject2.put("CUSTOM_INFO",jsonObject3);
+                        jsonObject1.remove("BUSI_INFO");
+                        jsonObject1.put("BUSI_INFO",jsonObject2);
+                        jsonObject.remove("BODY");
+                        jsonObject.put("BODY",jsonObject1);
+                        param.remove("ROOT");
+                        param.put("ROOT",jsonObject);
+                        //log.info("param："+param);
+                        counti++;
+                        log.info(counti);
+                        semaphore.acquire();
+                        long begin = System.currentTimeMillis();
+                        String rtnStr = "";
+                                //serviceClient.callService(serviceName,param.toString() , String.class, ArchitectureType.SPRINGCLOUD);
+                        long end = System.currentTimeMillis();
+                        long time=end-begin;
+                        //log.info("time"+counti+"---------------"+time+"毫秒---rtnStr---------------"+rtnStr);
+                        semaphore.release();
+                    } catch (Exception e) {
+                        log.info("exception", e);
+                    }
+                    countDownLatch.countDown();
+                });
+            }
+            countDownLatch.await();
+            executorService.shutdown();
+
         }catch (Exception e){
             log.info("异常信息："+e.getMessage());
         }
@@ -100,5 +124,6 @@ public class PressureTest {
             throw new IOException();
         }
     }
+
 
 }
